@@ -9,14 +9,11 @@ class InstagramTabView extends StatefulWidget {
   final Color? selectedItemColor;
   final Color? unselectedItemColor;
   final double? unselectedFontSize;
-  final List<String> bottomBarLabels;
-  final List<Widget> bottomBarIcons;
   final EdgeInsets? bottomNavigationBarItemPadding;
   final double? height;
   final Function(int)? onTap;
   final Color? backgroundColor;
   final double? iconSize;
-  final List<Widget> pages;
   final IconThemeData? selectedIconTheme;
   final bool? showSelectedLabels;
   final bool? showUnselectedLabels;
@@ -24,6 +21,7 @@ class InstagramTabView extends StatefulWidget {
   final BottomNavigationBarLandscapeLayout? bottomNavigationBarLandscapeLayout;
   final MouseCursor? mouseCursor;
   final IconThemeData? unselectedIconTheme;
+  final List<InstagramTabItem> items;
 
   const InstagramTabView({
     Key? key,
@@ -35,12 +33,9 @@ class InstagramTabView extends StatefulWidget {
     this.selectedItemColor,
     this.unselectedItemColor,
     this.unselectedFontSize,
-    required this.bottomBarLabels,
-    required this.bottomBarIcons,
     this.bottomNavigationBarItemPadding,
     this.height,
     this.onTap,
-    required this.pages,
     this.backgroundColor,
     this.iconSize,
     this.showSelectedLabels,
@@ -50,6 +45,7 @@ class InstagramTabView extends StatefulWidget {
     this.enableFeedback,
     this.mouseCursor,
     this.unselectedIconTheme,
+    required this.items,
   }) : super(key: key);
 
   @override
@@ -66,32 +62,32 @@ class _InstagramTabViewState extends State<InstagramTabView>
   void initState() {
     super.initState();
     tabController = TabController(
-      length: widget.bottomBarLabels.length,
+      length: widget.items.length,
       vsync: this,
     );
-    for (int i = 0; i < widget.bottomBarLabels.length; i++) {
-      final key = GlobalKey<NavigatorState>(debugLabel: '${widget.pages[i]}');
+    for (int i = 0; i < widget.items.length; i++) {
+      final key = GlobalKey<NavigatorState>(debugLabel: '${widget.items[i].page}');
       TabConsts.navigatorKeys.add(key);
       TabConsts.navigators.add(IndexedStackChild(
         child: Navigator(
           key: key,
           onGenerateRoute: (settings) => MaterialPageRoute(
-            builder: (context) => widget.pages[i],
+            builder: (context) => widget.items[i].page,
           ),
         ),
       ));
     }
 
     TabConsts.bottomBarItemList = List.generate(
-      widget.bottomBarLabels.length,
+      widget.items.length,
       (index) => BottomNavigationBarItem(
         icon: Container(
           height: widget.height ?? 40,
           padding: widget.bottomNavigationBarItemPadding ??
               const EdgeInsets.only(bottom: 4.0),
-          child: widget.bottomBarIcons[index],
+          child: widget.items[index].icon,
         ),
-        label: widget.bottomBarLabels[index],
+        label: widget.items[index].label,
       ),
     );
   }

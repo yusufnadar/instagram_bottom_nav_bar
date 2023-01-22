@@ -2,6 +2,7 @@ library instagram_bottom_nav_bar;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'widget/instagram_tab_item.dart';
 import 'widget/proste_indexed_stack.dart';
 
 part 'view/bottom_nav_bar_view.dart';

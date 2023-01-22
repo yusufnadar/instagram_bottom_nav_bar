@@ -12,3 +12,6 @@
 
 ## [2.0.3] - 2023-01-22
 - Preview added
+
+## [2.0.4] - 2023-01-22
+- InstagramTabItem model created
