@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-
+  http:
   instagram_bottom_nav_bar:
     path: ../
 

@@ -1,11 +1,15 @@
-A Flutter package that implements the Instagram Bottom Navigation Bar by Yusuf Nadaroglu in Flutter.
+Best bottom bar structure created to control page flow.
+
+## Preview
+
+![Bottom Bar](gifs/bottomBar.gif) 
 
 ## Features
 
 - [x] As in Instagram logic, when you save only 3 of the previous tabs and press the back button, it
   goes to the previous tab.
 - [x] If you are in a tab, it will return to the old page when the back button is clicked.
-- [x] If there is a tab you haven't been to before, that tab will be shown after you go.
+- [x] If there is a tab you haven't been to before, that tab will be load after you go.
 
 ## Important Notes
 
@@ -24,7 +28,7 @@ Add Instagram Bottom Navigation Bar to your pubspec.yaml in dependencies: sectio
 
 ```yaml
 dependencies:
-  instagram_bottom_nav_bar: ^1.0.0
+  instagram_bottom_nav_bar: ^2.0.0
 ```
 
 Update dependencies:

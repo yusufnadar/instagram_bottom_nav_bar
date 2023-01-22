@@ -5,9 +5,18 @@ class Messages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    print('message');
+    return Scaffold(
+      appBar: AppBar(title: Text('Messages'),backgroundColor: Colors.purple.shade700,),
+      backgroundColor: Colors.purple.shade700,
       body: Center(
-        child: Text('Messages'),
+        child: Text(
+          'Messages',
+          style: TextStyle(
+            fontSize: 30,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }

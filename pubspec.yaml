@@ -1,6 +1,6 @@
 name: instagram_bottom_nav_bar
-description: Instagram Bottom Navigation Bar
-version: 1.0.0
+description: Best bottom bar structure created to control page flow.
+version: 2.0.0
 homepage: https://github.com/yusufnadar/instagram_bottom_navigation_bar.git
 
 environment:
@@ -10,3 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+

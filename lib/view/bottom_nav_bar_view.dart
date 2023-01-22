@@ -70,12 +70,18 @@ class _InstagramTabViewState extends State<InstagramTabView>
       vsync: this,
     );
     for (int i = 0; i < widget.bottomBarLabels.length; i++) {
-      TabConsts.pagesShowedMap['alreadyShowed$i'] = false;
-      TabConsts.navigatorKeys.add(
-        GlobalKey<NavigatorState>(debugLabel: 'item$i'),
-      );
+      final key = GlobalKey<NavigatorState>(debugLabel: '${widget.pages[i]}');
+      TabConsts.navigatorKeys.add(key);
+      TabConsts.navigators.add(IndexedStackChild(
+        child: Navigator(
+          key: key,
+          onGenerateRoute: (settings) => MaterialPageRoute(
+            builder: (context) => widget.pages[i],
+          ),
+        ),
+      ));
     }
-    bottomPagesOpeningFirstTime(0);
+
     TabConsts.bottomBarItemList = List.generate(
       widget.bottomBarLabels.length,
       (index) => BottomNavigationBarItem(
@@ -125,12 +131,9 @@ class _InstagramTabViewState extends State<InstagramTabView>
           onTap: widget.onTap ?? changeIndex,
           items: TabConsts.bottomBarItemList,
         ),
-        body: CupertinoTabView(
-          navigatorKey: TabConsts.navigatorKeys[currentIndex],
-          builder: (context) => PageShowed(
-            index: currentIndex,
-            child: widget.pages[currentIndex],
-          ),
+        body: ProsteIndexedStack(
+          index: currentIndex,
+          children: TabConsts.navigators,
         ),
       ),
     );
@@ -162,7 +165,6 @@ class _InstagramTabViewState extends State<InstagramTabView>
   // change bottom bar index
   void changeIndex(int itemIndex) {
     setState(() {});
-    bottomPagesOpeningFirstTime(itemIndex);
     if (itemIndex == currentIndex) {
       TabConsts.navigatorKeys[currentIndex].currentState?.popUntil(
         (route) => route.isFirst,
@@ -180,12 +182,6 @@ class _InstagramTabViewState extends State<InstagramTabView>
         TabConsts.pageList.removeAt(1);
         TabConsts.pageList.add(currentIndex);
       }
-    }
-  }
-
-  void bottomPagesOpeningFirstTime(itemIndex) {
-    if (TabConsts.pagesShowedMap['alreadyShowed$itemIndex'] != true) {
-      TabConsts.pagesShowedMap['alreadyShowed$itemIndex'] = true;
     }
   }
 }

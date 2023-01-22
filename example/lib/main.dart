@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const InstagramTabView(
+      debugShowCheckedModeBanner: false,
+      home: InstagramTabView(
         bottomBarLabels: [
           'Home Page',
           'Messages',
@@ -25,6 +26,8 @@ class MyApp extends StatelessWidget {
           Icon(Icons.message),
           Icon(Icons.person),
         ],
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey.shade400,
         backgroundColor: Colors.white,
         // Default is Colors.white
         elevation: 12,

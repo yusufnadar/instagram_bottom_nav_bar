@@ -5,8 +5,6 @@ class TabConsts {
 
   static List<int> pageList = [0];
 
-  static Map<String, dynamic> pagesShowedMap = {};
-
   static const List<String> bottomBarLabels = [];
 
   static const List<IconData> bottomBarIcons = [];
@@ -14,5 +12,5 @@ class TabConsts {
   static List<GlobalKey<NavigatorState>> navigatorKeys =
       <GlobalKey<NavigatorState>>[];
 
-  static dynamic pages = [];
+  static List<IndexedStackChild> navigators = <IndexedStackChild>[];
 }
