@@ -1,0 +1,12 @@
+name: instagram_bottom_nav_bar
+description: Instagram Bottom Navigation Bar
+version: 1.0.0
+homepage: https://github.com/yusufnadar/instagram_bottom_navigation_bar.git
+
+environment:
+  sdk: '>=2.18.6 <3.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
