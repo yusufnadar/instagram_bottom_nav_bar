@@ -24,3 +24,6 @@
 
 ## [3.0.0] - 2023-03-09
 - Change icons to png, jpg or svg with IconType (required)
+
+## [3.0.1] - 2023-03-09
+- You can set the icon size

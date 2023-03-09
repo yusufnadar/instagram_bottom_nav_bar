@@ -23,6 +23,12 @@ class InstagramTabView extends StatefulWidget {
   final IconThemeData? unselectedIconTheme;
   final List<InstagramTabItem> items;
   final IconType iconType;
+  final double? selectedIconHeight;
+  final double? unSelectedIconHeight;
+  final double? selectedIconWidth;
+  final double? unSelectedIconWidth;
+  final double? selectedIconSize;
+  final double? unSelectedIconSize;
 
   const InstagramTabView({
     Key? key,
@@ -48,6 +54,12 @@ class InstagramTabView extends StatefulWidget {
     this.unselectedIconTheme,
     required this.items,
     required this.iconType,
+    this.selectedIconHeight,
+    this.unSelectedIconHeight,
+    this.selectedIconWidth,
+    this.unSelectedIconWidth,
+    this.selectedIconSize,
+    this.unSelectedIconSize,
   }) : super(key: key);
 
   @override
@@ -106,6 +118,12 @@ class _InstagramTabViewState extends State<InstagramTabView>
           color: index == currentIndex
               ? widget.selectedItemColor
               : widget.unselectedItemColor,
+          width: index == currentIndex
+              ? widget.selectedIconWidth
+              : widget.unSelectedIconWidth,
+          height: index == currentIndex
+              ? widget.selectedIconHeight
+              : widget.unSelectedIconHeight,
         );
       } else if (widget.iconType == IconType.svg) {
         child = SvgPicture.asset(
@@ -116,13 +134,22 @@ class _InstagramTabViewState extends State<InstagramTabView>
                 : widget.unselectedItemColor,
             BlendMode.srcIn,
           ),
+          width: index == currentIndex
+              ? widget.selectedIconWidth
+              : widget.unSelectedIconWidth,
+          height: index == currentIndex
+              ? widget.selectedIconHeight
+              : widget.unSelectedIconHeight,
         );
-      }else if(widget.iconType == IconType.icon){
+      } else if (widget.iconType == IconType.icon) {
         child = Icon(
           widget.items[index].icon,
           color: index == currentIndex
               ? widget.selectedItemColor
-              : widget.unselectedItemColor
+              : widget.unselectedItemColor,
+          size: index == currentIndex
+              ? widget.selectedIconSize
+              : widget.unSelectedIconSize,
         );
       }
       return BottomNavigationBarItem(
@@ -141,7 +168,6 @@ class _InstagramTabViewState extends State<InstagramTabView>
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           elevation: widget.elevation ?? 12,
-
           type: widget.bottomNavigationBarType ?? BottomNavigationBarType.fixed,
           currentIndex: currentIndex,
           selectedFontSize: widget.selectedFontSize ?? 8,
