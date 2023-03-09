@@ -6,8 +6,8 @@ class InstagramTabView extends StatefulWidget {
   final double? selectedFontSize;
   final TextStyle? selectedLabelStyle;
   final TextStyle? unselectedLabelStyle;
-  final Color? selectedItemColor;
-  final Color? unselectedItemColor;
+  final Color selectedItemColor;
+  final Color unselectedItemColor;
   final double? unselectedFontSize;
   final EdgeInsets? bottomNavigationBarItemPadding;
   final double? height;
@@ -22,6 +22,7 @@ class InstagramTabView extends StatefulWidget {
   final MouseCursor? mouseCursor;
   final IconThemeData? unselectedIconTheme;
   final List<InstagramTabItem> items;
+  final IconType iconType;
 
   const InstagramTabView({
     Key? key,
@@ -30,8 +31,8 @@ class InstagramTabView extends StatefulWidget {
     this.selectedFontSize,
     this.selectedLabelStyle,
     this.unselectedLabelStyle,
-    this.selectedItemColor,
-    this.unselectedItemColor,
+    required this.selectedItemColor,
+    required this.unselectedItemColor,
     this.unselectedFontSize,
     this.bottomNavigationBarItemPadding,
     this.height,
@@ -46,6 +47,7 @@ class InstagramTabView extends StatefulWidget {
     this.mouseCursor,
     this.unselectedIconTheme,
     required this.items,
+    required this.iconType,
   }) : super(key: key);
 
   @override
@@ -66,39 +68,80 @@ class _InstagramTabViewState extends State<InstagramTabView>
       vsync: this,
     );
     for (int i = 0; i < widget.items.length; i++) {
-      final key = GlobalKey<NavigatorState>(debugLabel: '${widget.items[i].page}');
+      final key =
+          GlobalKey<NavigatorState>(debugLabel: '${widget.items[i].page}');
       TabConsts.navigatorKeys.add(key);
-      TabConsts.navigators.add(IndexedStackChild(
-        child: Navigator(
-          key: key,
-          onGenerateRoute: (settings) => MaterialPageRoute(
-            builder: (context) => widget.items[i].page,
+      if (widget.items[i].settings != null) {
+        TabConsts.navigators.add(
+          IndexedStackChild(
+            child: Navigator(
+              initialRoute: widget.items[i].initialRoute,
+              key: key,
+              onGenerateRoute: widget.items[i].settings,
+            ),
           ),
-        ),
-      ));
+        );
+      } else {
+        TabConsts.navigators.add(
+          IndexedStackChild(
+            child: Navigator(
+              key: key,
+              onGenerateRoute: (settings) => MaterialPageRoute(
+                builder: (context) => widget.items[i].page,
+              ),
+            ),
+          ),
+        );
+      }
     }
-
-    TabConsts.bottomBarItemList = List.generate(
-      widget.items.length,
-      (index) => BottomNavigationBarItem(
-        icon: Container(
-          height: widget.height ?? 40,
-          padding: widget.bottomNavigationBarItemPadding ??
-              const EdgeInsets.only(bottom: 4.0),
-          child: widget.items[index].icon,
-        ),
-        label: widget.items[index].label,
-      ),
-    );
   }
 
   @override
   Widget build(BuildContext context) {
+    TabConsts.bottomBarItemList = List.generate(widget.items.length, (index) {
+      late Widget child;
+      if (widget.iconType == IconType.pngOrJpg) {
+        child = Image.asset(
+          widget.items[index].icon,
+          color: index == currentIndex
+              ? widget.selectedItemColor
+              : widget.unselectedItemColor,
+        );
+      } else if (widget.iconType == IconType.svg) {
+        child = SvgPicture.asset(
+          widget.items[index].icon,
+          colorFilter: ColorFilter.mode(
+            index == currentIndex
+                ? widget.selectedItemColor
+                : widget.unselectedItemColor,
+            BlendMode.srcIn,
+          ),
+        );
+      }else if(widget.iconType == IconType.icon){
+        child = Icon(
+          widget.items[index].icon,
+          color: index == currentIndex
+              ? widget.selectedItemColor
+              : widget.unselectedItemColor
+        );
+      }
+      return BottomNavigationBarItem(
+        icon: Container(
+          height: widget.height ?? 40,
+          padding: widget.bottomNavigationBarItemPadding ??
+              const EdgeInsets.only(bottom: 4.0),
+          //child: widget.items[index].icon,
+          child: child,
+        ),
+        label: widget.items[index].label,
+      );
+    });
     return WillPopScope(
       onWillPop: () => onWillPop(),
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           elevation: widget.elevation ?? 12,
+
           type: widget.bottomNavigationBarType ?? BottomNavigationBarType.fixed,
           currentIndex: currentIndex,
           selectedFontSize: widget.selectedFontSize ?? 8,
@@ -120,7 +163,7 @@ class _InstagramTabViewState extends State<InstagramTabView>
           landscapeLayout: widget.bottomNavigationBarLandscapeLayout,
           selectedItemColor: widget.selectedItemColor,
           unselectedItemColor: widget.unselectedItemColor,
-          unselectedFontSize: widget.unselectedFontSize ?? 16,
+          unselectedFontSize: widget.unselectedFontSize ?? 8,
           enableFeedback: widget.enableFeedback,
           mouseCursor: widget.mouseCursor,
           unselectedIconTheme: widget.unselectedIconTheme,

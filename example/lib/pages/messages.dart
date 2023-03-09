@@ -5,7 +5,6 @@ class Messages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('message');
     return Scaffold(
       appBar: AppBar(title: Text('Messages'),backgroundColor: Colors.purple.shade700,),
       backgroundColor: Colors.purple.shade700,

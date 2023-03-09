@@ -7,7 +7,6 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('profile');
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),

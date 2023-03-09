@@ -28,7 +28,7 @@ Add Instagram Bottom Navigation Bar to your pubspec.yaml in dependencies: sectio
 
 ```yaml
 dependencies:
-  instagram_bottom_nav_bar: ^2.0.4
+  instagram_bottom_nav_bar: ^3.0.0
 ```
 
 Update dependencies:
@@ -55,6 +55,7 @@ InstagramTabView(
       showUnselectedLabels: true, // Default showUnselectedLabels is true
       iconSize: 24, // Default iconSize is 24,
       bottomNavigationBarType: BottomNavigationBarType.fixed,
+      iconType: IconType.icon,
       items: [
         InstagramTabItem(label: 'Home Page', page: HomePage(), icon: Icon(Icons.add)),
         InstagramTabItem(label: 'Profile', page: Messages(), icon: Icon(Icons.refresh)),

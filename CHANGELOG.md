@@ -15,3 +15,12 @@
 
 ## [2.0.4] - 2023-01-22
 - InstagramTabItem model created
+
+## [2.0.5] - 2023-01-28
+- InstagramTabItem model has onGenerateRoute
+
+## [2.0.6] - 2023-01-28
+- InstagramTabItem model has settings and initialGen
+
+## [3.0.0] - 2023-03-09
+- Change icons to png, jpg or svg with IconType (required)

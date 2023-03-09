@@ -5,7 +5,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('home');
     return Scaffold(
       appBar: AppBar(title: Text('Home Page'),backgroundColor: Colors.red.shade700,),
       backgroundColor: Colors.red.shade700,
@@ -27,7 +26,6 @@ class HomePageDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('home detail');
     return Scaffold(
       backgroundColor: Colors.amber.shade700,
       appBar: AppBar(title: Text('Detail'),backgroundColor: Colors.amber.shade700,),
