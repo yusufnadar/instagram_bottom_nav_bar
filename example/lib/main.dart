@@ -22,14 +22,16 @@ class MyApp extends StatelessWidget {
         // Default is Colors.white
         elevation: 12,
         // Default elevation is 12,
-        showSelectedLabels: true,
-        // Default showSelectedLabels is true,
-        showUnselectedLabels: true,
-        // Default showUnselectedLabels is true
+        showSelectedLabels: false,
+        // Default showSelectedLabels is false,
+        showUnselectedLabels: false,
+        // Default showUnselectedLabels is false
         iconSize: 24,
         // Default iconSize is 24,
         bottomNavigationBarType: BottomNavigationBarType.fixed,
         iconType: IconType.icon,
+        dividerWidth: 20,
+        isDivider: true,
         items: [
           InstagramTabItem(
             label: 'Home Page',

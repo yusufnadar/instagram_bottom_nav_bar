@@ -27,3 +27,12 @@
 
 ## [3.0.1] - 2023-03-09
 - You can set the icon size
+
+## [3.0.2] - 2023-04-07
+- Divider feature added (width,height,color,margin)
+
+## [3.0.3] - 2023-04-07
+- Divider bug fixed
+
+## [3.0.4] - 2023-04-07
+- Divider bug fixed

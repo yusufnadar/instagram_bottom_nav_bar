@@ -29,6 +29,12 @@ class InstagramTabView extends StatefulWidget {
   final double? unSelectedIconWidth;
   final double? selectedIconSize;
   final double? unSelectedIconSize;
+  final bool? isDivider;
+  final double? dividerWidth;
+  final double? dividerHeight;
+  final Color? dividerColor;
+  final double? dividerMargin;
+  final double? dividerRadius;
 
   const InstagramTabView({
     Key? key,
@@ -60,6 +66,12 @@ class InstagramTabView extends StatefulWidget {
     this.unSelectedIconWidth,
     this.selectedIconSize,
     this.unSelectedIconSize,
+    this.isDivider,
+    this.dividerWidth,
+    this.dividerHeight,
+    this.dividerColor,
+    this.dividerMargin,
+    this.dividerRadius,
   }) : super(key: key);
 
   @override
@@ -113,44 +125,145 @@ class _InstagramTabViewState extends State<InstagramTabView>
     TabConsts.bottomBarItemList = List.generate(widget.items.length, (index) {
       late Widget child;
       if (widget.iconType == IconType.pngOrJpg) {
-        child = Image.asset(
-          widget.items[index].icon,
-          color: index == currentIndex
-              ? widget.selectedItemColor
-              : widget.unselectedItemColor,
-          width: index == currentIndex
-              ? widget.selectedIconWidth
-              : widget.unSelectedIconWidth,
-          height: index == currentIndex
-              ? widget.selectedIconHeight
-              : widget.unSelectedIconHeight,
-        );
-      } else if (widget.iconType == IconType.svg) {
-        child = SvgPicture.asset(
-          widget.items[index].icon,
-          colorFilter: ColorFilter.mode(
-            index == currentIndex
+        if (widget.isDivider == true) {
+          child = Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                widget.items[index].icon,
+                color: index == currentIndex
+                    ? widget.selectedItemColor
+                    : widget.unselectedItemColor,
+                width: index == currentIndex
+                    ? widget.selectedIconWidth
+                    : widget.unSelectedIconWidth,
+                height: index == currentIndex
+                    ? widget.selectedIconHeight
+                    : widget.unSelectedIconHeight,
+              ),
+              if (index == currentIndex)
+                Container(
+                  width: widget.dividerWidth ?? 15,
+                  height: widget.dividerHeight ?? 2,
+                  decoration: BoxDecoration(
+                    color: widget.dividerColor ?? Colors.black,
+                    borderRadius:
+                    BorderRadius.circular(widget.dividerRadius ?? 5),
+                  ),
+                  margin: EdgeInsets.only(top: widget.dividerMargin ?? 5),
+                )
+              else
+                SizedBox(height: widget.dividerMargin ?? 5)
+            ],
+          );
+        } else {
+          child = Image.asset(
+            widget.items[index].icon,
+            color: index == currentIndex
                 ? widget.selectedItemColor
                 : widget.unselectedItemColor,
-            BlendMode.srcIn,
-          ),
-          width: index == currentIndex
-              ? widget.selectedIconWidth
-              : widget.unSelectedIconWidth,
-          height: index == currentIndex
-              ? widget.selectedIconHeight
-              : widget.unSelectedIconHeight,
-        );
+            width: index == currentIndex
+                ? widget.selectedIconWidth
+                : widget.unSelectedIconWidth,
+            height: index == currentIndex
+                ? widget.selectedIconHeight
+                : widget.unSelectedIconHeight,
+          );
+        }
+      } else if (widget.iconType == IconType.svg) {
+        if (widget.isDivider == true) {
+          child = Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                widget.items[index].icon,
+                colorFilter: ColorFilter.mode(
+                  index == currentIndex
+                      ? widget.selectedItemColor
+                      : widget.unselectedItemColor,
+                  BlendMode.srcIn,
+                ),
+                width: index == currentIndex
+                    ? widget.selectedIconWidth
+                    : widget.unSelectedIconWidth,
+                height: index == currentIndex
+                    ? widget.selectedIconHeight
+                    : widget.unSelectedIconHeight,
+              ),
+              if (index == currentIndex)
+                Container(
+                  width: widget.dividerWidth ?? 15,
+                  height: widget.dividerHeight ?? 2,
+                  decoration: BoxDecoration(
+                    color: widget.dividerColor ?? Colors.black,
+                    borderRadius:
+                    BorderRadius.circular(widget.dividerRadius ?? 5),
+                  ),
+                  margin: EdgeInsets.only(top: widget.dividerMargin ?? 5),
+                )
+              else
+                SizedBox(height: widget.dividerMargin ?? 5)
+            ],
+          );
+        } else
+          child = Padding(
+            padding: EdgeInsets.only(top: widget.dividerMargin ?? 5),
+            child: SvgPicture.asset(
+              widget.items[index].icon,
+              colorFilter: ColorFilter.mode(
+                index == currentIndex
+                    ? widget.selectedItemColor
+                    : widget.unselectedItemColor,
+                BlendMode.srcIn,
+              ),
+              width: index == currentIndex
+                  ? widget.selectedIconWidth
+                  : widget.unSelectedIconWidth,
+              height: index == currentIndex
+                  ? widget.selectedIconHeight
+                  : widget.unSelectedIconHeight,
+            ),
+          );
       } else if (widget.iconType == IconType.icon) {
-        child = Icon(
-          widget.items[index].icon,
-          color: index == currentIndex
-              ? widget.selectedItemColor
-              : widget.unselectedItemColor,
-          size: index == currentIndex
-              ? widget.selectedIconSize
-              : widget.unSelectedIconSize,
-        );
+        if (widget.isDivider == true) {
+          child = Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                widget.items[index].icon,
+                color: index == currentIndex
+                    ? widget.selectedItemColor
+                    : widget.unselectedItemColor,
+                size: index == currentIndex
+                    ? widget.selectedIconSize
+                    : widget.unSelectedIconSize,
+              ),
+              if (index == currentIndex)
+                Container(
+                  width: widget.dividerWidth ?? 15,
+                  height: widget.dividerHeight ?? 2,
+                  decoration: BoxDecoration(
+                    color: widget.dividerColor ?? Colors.black,
+                    borderRadius:
+                        BorderRadius.circular(widget.dividerRadius ?? 5),
+                  ),
+                  margin: EdgeInsets.only(top: widget.dividerMargin ?? 5),
+                )
+              else
+                SizedBox(height: widget.dividerMargin ?? 5)
+            ],
+          );
+        } else {
+          child = Icon(
+            widget.items[index].icon,
+            color: index == currentIndex
+                ? widget.selectedItemColor
+                : widget.unselectedItemColor,
+            size: index == currentIndex
+                ? widget.selectedIconSize
+                : widget.unSelectedIconSize,
+          );
+        }
       }
       return BottomNavigationBarItem(
         icon: Container(
