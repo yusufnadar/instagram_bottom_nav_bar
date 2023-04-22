@@ -32,7 +32,13 @@ class MyApp extends StatelessWidget {
         iconType: IconType.icon,
         dividerWidth: 20,
         isDivider: true,
+        middleColor: Colors.red,
         items: [
+          InstagramTabItem(
+            label: 'Home Page',
+            page: HomePage(),
+            icon: Icons.add,
+          ),
           InstagramTabItem(
             label: 'Home Page',
             page: HomePage(),

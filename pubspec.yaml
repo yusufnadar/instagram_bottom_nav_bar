@@ -1,6 +1,6 @@
 name: instagram_bottom_nav_bar
-description: Best bottom bar structure created to control page flow.
-version: 3.0.4
+description: Best bottom bar structure created to control page flow. You don't need to describe navigatorKey for each Bottom Bar Item. I've already do that.
+version: 3.0.7
 homepage: https://github.com/yusufnadar/instagram_bottom_nav_bar
 
 environment:
@@ -11,7 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_svg: ^2.0.2
+  flutter_svg_provider: ^1.0.3
+  flutter_svg: ^1.0.1
 
 dev_dependencies:
   flutter_test:

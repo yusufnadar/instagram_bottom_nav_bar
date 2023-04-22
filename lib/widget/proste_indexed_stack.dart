@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// if don't click a tab yet the page shows nothing
+
 class IndexedStackChild {
   final bool preload;
 
@@ -46,8 +48,10 @@ class _ProsteLazyIndexedStackState extends State<ProsteIndexedStack> {
           ? widget.children[index].child
           : SizedBox.shrink(),
     );
-    _widgetState = List.generate(widget.children.length,
-        (index) => index == widget.index || widget.children[index].preload);
+    _widgetState = List.generate(
+      widget.children.length,
+      (index) => index == widget.index || widget.children[index].preload,
+    );
   }
 
   @override

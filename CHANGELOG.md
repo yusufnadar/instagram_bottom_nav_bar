@@ -36,3 +36,12 @@
 
 ## [3.0.4] - 2023-04-07
 - Divider bug fixed
+
+## [3.0.5] - 2023-04-08
+- Middle Color Added
+
+## [3.0.6] - 2023-04-09
+- Svg package changed
+
+## [3.0.7] - 2023-04-22
+- Comments added between the code lines and fixed general
