@@ -30,9 +30,14 @@ class MyApp extends StatelessWidget {
         // Default iconSize is 24,
         bottomNavigationBarType: BottomNavigationBarType.fixed,
         iconType: IconType.icon,
-        dividerWidth: 20,
+        dividerWidth: 40,
         isDivider: true,
-        middleColor: Colors.red,
+        dividerHeight: 3,
+        dividerMargin: 5,
+        //middleHeight: 40,
+        //height: 70,
+        selectedIconHeight: 20,
+        //middleColor: Colors.blue,
         items: [
           InstagramTabItem(
             label: 'Home Page',

@@ -44,4 +44,13 @@
 - Svg package changed
 
 ## [3.0.7] - 2023-04-22
-- Comments added between the code lines and fixed general
+- Comment lines added between the code lines and fixed general
+
+## [3.0.8] - 2023-04-22
+- Middle icon height is changeable
+
+## [3.0.9] - 2023-04-22
+- Divider feature bugs fixed
+
+## [3.0.10] - 2023-04-22
+- New function added inside of onTap

@@ -87,7 +87,13 @@ class InstagramTabView extends StatefulWidget {
   // middle icon color
   final Color? middleColor;
 
+  // middle icon height
+  final double? middleHeight;
+
   final int? currentIndex;
+
+  // work inside onTap function
+  final Function()? onTapWith;
 
   const InstagramTabView({
     Key? key,
@@ -127,6 +133,7 @@ class InstagramTabView extends StatefulWidget {
     this.dividerRadius,
     this.middleColor,
     this.currentIndex,
+    this.middleHeight, this.onTapWith,
   }) : super(key: key);
 
   @override
@@ -202,6 +209,7 @@ class _InstagramTabViewState extends State<InstagramTabView>
       (index) {
         // if middle tab should different color we can control that
         var middleColor;
+        var middleHeight;
         if (widget.middleColor != null) {
           // if items length equal three we find the middle item
           // if items length equal five we find the middle item
@@ -213,6 +221,20 @@ class _InstagramTabViewState extends State<InstagramTabView>
           if (widget.items.length == 5) {
             if (index == 2) {
               middleColor = widget.middleColor;
+            }
+          }
+        }
+        if (widget.middleHeight != null) {
+          // if items length equal three we find the middle item
+          // if items length equal five we find the middle item
+          if (widget.items.length == 3) {
+            if (index == 1) {
+              middleHeight = widget.middleHeight;
+            }
+          }
+          if (widget.items.length == 5) {
+            if (index == 2) {
+              middleHeight = widget.middleHeight;
             }
           }
         }
@@ -237,9 +259,11 @@ class _InstagramTabViewState extends State<InstagramTabView>
                       ? widget.selectedIconWidth
                       : widget.unSelectedIconWidth,
                   // we can control height of selected and unselected item
-                  height: index == currentIndex
-                      ? widget.selectedIconHeight
-                      : widget.unSelectedIconHeight,
+                  height: middleHeight == null
+                      ? index == currentIndex
+                          ? widget.selectedIconHeight
+                          : widget.unSelectedIconHeight
+                      : widget.middleHeight,
                 ),
                 if (index == currentIndex && middleColor == null)
                   // if there is a divider it shows here
@@ -263,7 +287,10 @@ class _InstagramTabViewState extends State<InstagramTabView>
                 else
                   // it should be because when is no divider one tab it should be
                   // the same height each other
-                  SizedBox(height: widget.dividerMargin ?? 5)
+                  SizedBox(
+                    height: (widget.dividerHeight ?? 2) +
+                        (widget.dividerMargin ?? 5),
+                  )
               ],
             );
           } else {
@@ -278,9 +305,11 @@ class _InstagramTabViewState extends State<InstagramTabView>
               width: index == currentIndex
                   ? widget.selectedIconWidth
                   : widget.unSelectedIconWidth,
-              height: index == currentIndex
-                  ? widget.selectedIconHeight
-                  : widget.unSelectedIconHeight,
+              height: middleHeight == null
+                  ? index == currentIndex
+                      ? widget.selectedIconHeight
+                      : widget.unSelectedIconHeight
+                  : widget.middleHeight,
             );
           }
         } else if (widget.iconType == IconType.svg) {
@@ -300,9 +329,11 @@ class _InstagramTabViewState extends State<InstagramTabView>
                   width: index == currentIndex
                       ? widget.selectedIconWidth
                       : widget.unSelectedIconWidth,
-                  height: index == currentIndex
-                      ? widget.selectedIconHeight
-                      : widget.unSelectedIconHeight,
+                  height: middleHeight == null
+                      ? index == currentIndex
+                          ? widget.selectedIconHeight
+                          : widget.unSelectedIconHeight
+                      : widget.middleHeight,
                 ),
                 if (index == currentIndex && middleColor == null)
                   Container(
@@ -316,7 +347,10 @@ class _InstagramTabViewState extends State<InstagramTabView>
                     margin: EdgeInsets.only(top: widget.dividerMargin ?? 5),
                   )
                 else
-                  SizedBox(height: widget.dividerMargin ?? 5)
+                  SizedBox(
+                    height: (widget.dividerHeight ?? 2) +
+                        (widget.dividerMargin ?? 5),
+                  )
               ],
             );
           } else
@@ -332,9 +366,11 @@ class _InstagramTabViewState extends State<InstagramTabView>
                 width: index == currentIndex
                     ? widget.selectedIconWidth
                     : widget.unSelectedIconWidth,
-                height: index == currentIndex
-                    ? widget.selectedIconHeight
-                    : widget.unSelectedIconHeight,
+                height: middleHeight == null
+                    ? index == currentIndex
+                        ? widget.selectedIconHeight
+                        : widget.unSelectedIconHeight
+                    : widget.middleHeight,
               ),
             );
         } else if (widget.iconType == IconType.icon) {
@@ -343,17 +379,17 @@ class _InstagramTabViewState extends State<InstagramTabView>
             child = Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  widget.items[index].icon,
-                  color: middleColor == null
-                      ? index == currentIndex
-                          ? widget.selectedItemColor
-                          : widget.unselectedItemColor
-                      : middleColor,
-                  size: index == currentIndex
-                      ? widget.selectedIconSize
-                      : widget.unSelectedIconSize,
-                ),
+                Icon(widget.items[index].icon,
+                    color: middleColor == null
+                        ? index == currentIndex
+                            ? widget.selectedItemColor
+                            : widget.unselectedItemColor
+                        : middleColor,
+                    size: middleHeight == null
+                        ? index == currentIndex
+                            ? widget.selectedIconSize
+                            : widget.unSelectedIconSize
+                        : widget.middleHeight),
                 if (index == currentIndex && middleColor == null)
                   Container(
                     width: widget.dividerWidth ?? 15,
@@ -366,21 +402,24 @@ class _InstagramTabViewState extends State<InstagramTabView>
                     margin: EdgeInsets.only(top: widget.dividerMargin ?? 5),
                   )
                 else
-                  SizedBox(height: widget.dividerMargin ?? 5)
+                  SizedBox(
+                    height: (widget.dividerHeight ?? 2) +
+                        (widget.dividerMargin ?? 5),
+                  )
               ],
             );
           } else {
-            child = Icon(
-              widget.items[index].icon,
-              color: middleColor == null
-                  ? index == currentIndex
-                      ? widget.selectedItemColor
-                      : widget.unselectedItemColor
-                  : middleColor,
-              size: index == currentIndex
-                  ? widget.selectedIconSize
-                  : widget.unSelectedIconSize,
-            );
+            child = Icon(widget.items[index].icon,
+                color: middleColor == null
+                    ? index == currentIndex
+                        ? widget.selectedItemColor
+                        : widget.unselectedItemColor
+                    : middleColor,
+                size: middleHeight == null
+                    ? index == currentIndex
+                        ? widget.selectedIconSize
+                        : widget.unSelectedIconSize
+                    : widget.middleHeight);
           }
         }
         return BottomNavigationBarItem(
@@ -467,6 +506,9 @@ class _InstagramTabViewState extends State<InstagramTabView>
 
   // change bottom bar index
   void changeIndex(int itemIndex) {
+    if(widget.onTapWith != null){
+      widget.onTapWith!();
+    }
     setState(() {});
     if (itemIndex == currentIndex) {
       // if we click the same tab when we use it goes the first page of tab
