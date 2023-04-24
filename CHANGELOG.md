@@ -54,3 +54,6 @@
 
 ## [3.0.10] - 2023-04-22
 - New function added inside of onTap
+
+## [3.0.11] - 2023-04-24
+- Clear method provide to use bottom navigation bar again

@@ -136,6 +136,14 @@ class InstagramTabView extends StatefulWidget {
     this.middleHeight, this.onTapWith,
   }) : super(key: key);
 
+
+  static void clear() {
+    TabConsts.bottomBarItemList.clear();
+    TabConsts.navigatorKeys.clear();
+    TabConsts.navigators.clear();
+    TabConsts.pageList = [0];
+  }
+
   @override
   State<InstagramTabView> createState() => _InstagramTabViewState();
 }
@@ -143,6 +151,7 @@ class InstagramTabView extends StatefulWidget {
 class _InstagramTabViewState extends State<InstagramTabView>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
+
 
   // current index is 0 at first and you start at first page
   int currentIndex = 0;

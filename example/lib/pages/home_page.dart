@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_bottom_nav_bar/instagram_tab_view.dart';
+
+import 'test.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,7 +14,8 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.of(context,rootNavigator: false).push(MaterialPageRoute(builder: (context)=>HomePageDetail()));
+            InstagramTabView.clear();
+            Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Test()));
           },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.red.shade900),
           child: Text('Go Detail'),

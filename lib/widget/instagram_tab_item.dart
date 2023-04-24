@@ -12,6 +12,6 @@ class InstagramTabItem {
     required this.page,
     required this.icon,
     this.initialRoute,
-    this.settings
+    this.settings,
   });
 }
