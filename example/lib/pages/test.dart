@@ -10,29 +10,26 @@ class Test extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InstagramTabView(
-      selectedItemColor: Colors.black,
-      unselectedItemColor: Colors.grey.shade400,
+      selectedItemColor: Colors.purple,
+      unselectedItemColor: Colors.black,
       backgroundColor: Colors.white,
-      topOfBottomNavigationBar: ({Widget? child}) => Container(child: child),
+      //topOfBottomNavigationBar: ({Widget? child}) => Container(child: child),
       // Default is Colors.white
       elevation: 12,
       // Default elevation is 12,
-      showSelectedLabels: false,
+      showSelectedLabels: true,
       // Default showSelectedLabels is false,
-      showUnselectedLabels: false,
+      showUnselectedLabels: true,
       // Default showUnselectedLabels is false
       iconSize: 24,
       // Default iconSize is 24,
       bottomNavigationBarType: BottomNavigationBarType.fixed,
       iconType: IconType.icon,
       dividerWidth: 40,
-      isDivider: true,
+      //isDivider: true,
       dividerHeight: 3,
       dividerMargin: 5,
-      //middleHeight: 40,
-      //height: 70,
       selectedIconHeight: 20,
-      //middleColor: Colors.blue,
       items: [
         InstagramTabItem(
           label: 'Home Page',
@@ -45,7 +42,7 @@ class Test extends StatelessWidget {
           icon: Icons.add,
         ),
         InstagramTabItem(
-          label: 'Home Page',
+          label: 'Profile',
           page: Profile(),
           icon: Icons.add,
           settings: (settings) {

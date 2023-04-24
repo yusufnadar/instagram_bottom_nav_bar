@@ -28,7 +28,7 @@ Add Instagram Bottom Navigation Bar to your pubspec.yaml in dependencies: sectio
 
 ```yaml
 dependencies:
-  instagram_bottom_nav_bar: ^3.0.12
+  instagram_bottom_nav_bar: ^3.0.13
 ```
 
 Update dependencies:

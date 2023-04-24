@@ -60,3 +60,6 @@
 
 ## [3.0.12] - 2023-04-24
 - Wrap up bottom navigation bar
+
+## [3.0.13] - 2023-04-24
+- IconThemeData bug fixed

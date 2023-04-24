@@ -99,7 +99,7 @@ class InstagramTabView extends StatefulWidget {
 
   Function({Widget child})? topOfBottomNavigationBar;
 
-   InstagramTabView({
+  InstagramTabView({
     Key? key,
     this.elevation,
     this.bottomNavigationBarType,
@@ -217,8 +217,8 @@ class _InstagramTabViewState extends State<InstagramTabView>
     // we are adding tabs in build because when change some tab
     // we should see immediately
     generateTabs();
-    if(widget.topOfBottomNavigationBar == null){
-      widget.topOfBottomNavigationBar = ({Widget? child}){
+    if (widget.topOfBottomNavigationBar == null) {
+      widget.topOfBottomNavigationBar = ({Widget? child}) {
         return SizedBox(child: child);
       };
     }
@@ -316,8 +316,8 @@ class _InstagramTabViewState extends State<InstagramTabView>
                   // we can control color of selected and unselected item
                   color: middleColor == null
                       ? index == currentIndex
-                          ? widget.selectedItemColor
-                          : widget.unselectedItemColor
+                          ? widget.selectedIconTheme?.color
+                          : widget.unselectedIconTheme?.color
                       : middleColor,
                   // we can control width of selected and unselected item
                   width: index == currentIndex
@@ -364,8 +364,8 @@ class _InstagramTabViewState extends State<InstagramTabView>
               widget.items[index].icon,
               color: middleColor == null
                   ? index == currentIndex
-                      ? widget.selectedItemColor
-                      : widget.unselectedItemColor
+                      ? widget.selectedIconTheme?.color
+                      : widget.unselectedIconTheme?.color
                   : middleColor,
               width: index == currentIndex
                   ? widget.selectedIconWidth
@@ -388,8 +388,8 @@ class _InstagramTabViewState extends State<InstagramTabView>
                   widget.items[index].icon,
                   color: middleColor == null
                       ? index == currentIndex
-                          ? widget.selectedItemColor
-                          : widget.unselectedItemColor
+                          ? widget.selectedIconTheme?.color
+                          : widget.unselectedIconTheme?.color
                       : middleColor,
                   width: index == currentIndex
                       ? widget.selectedIconWidth
@@ -425,8 +425,8 @@ class _InstagramTabViewState extends State<InstagramTabView>
                 widget.items[index].icon,
                 color: middleColor == null
                     ? index == currentIndex
-                        ? widget.selectedItemColor
-                        : widget.unselectedItemColor
+                        ? widget.selectedIconTheme?.color
+                        : widget.unselectedIconTheme?.color
                     : middleColor,
                 width: index == currentIndex
                     ? widget.selectedIconWidth
@@ -444,17 +444,19 @@ class _InstagramTabViewState extends State<InstagramTabView>
             child = Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(widget.items[index].icon,
-                    color: middleColor == null
-                        ? index == currentIndex
-                            ? widget.selectedItemColor
-                            : widget.unselectedItemColor
-                        : middleColor,
-                    size: middleHeight == null
-                        ? index == currentIndex
-                            ? widget.selectedIconSize
-                            : widget.unSelectedIconSize
-                        : widget.middleHeight),
+                Icon(
+                  widget.items[index].icon,
+                  color: middleColor == null
+                      ? index == currentIndex
+                          ? widget.selectedIconTheme?.color
+                          : widget.unselectedIconTheme?.color
+                      : middleColor,
+                  size: middleHeight == null
+                      ? index == currentIndex
+                          ? widget.selectedIconSize
+                          : widget.unSelectedIconSize
+                      : widget.middleHeight,
+                ),
                 if (index == currentIndex && middleColor == null)
                   Container(
                     width: widget.dividerWidth ?? 15,
@@ -474,17 +476,19 @@ class _InstagramTabViewState extends State<InstagramTabView>
               ],
             );
           } else {
-            child = Icon(widget.items[index].icon,
-                color: middleColor == null
-                    ? index == currentIndex
-                        ? widget.selectedItemColor
-                        : widget.unselectedItemColor
-                    : middleColor,
-                size: middleHeight == null
-                    ? index == currentIndex
-                        ? widget.selectedIconSize
-                        : widget.unSelectedIconSize
-                    : widget.middleHeight);
+            child = Icon(
+              widget.items[index].icon,
+              color: middleColor == null
+                  ? index == currentIndex
+                      ? widget.selectedIconTheme?.color
+                      : widget.unselectedIconTheme?.color
+                  : middleColor,
+              size: middleHeight == null
+                  ? index == currentIndex
+                      ? widget.selectedIconSize
+                      : widget.unSelectedIconSize
+                  : widget.middleHeight,
+            );
           }
         }
         return BottomNavigationBarItem(

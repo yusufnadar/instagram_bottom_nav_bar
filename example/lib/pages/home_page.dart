@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_bottom_nav_bar/instagram_tab_view.dart';
-
 import 'test.dart';
 
 class HomePage extends StatelessWidget {
