@@ -13,6 +13,7 @@ class Test extends StatelessWidget {
       selectedItemColor: Colors.black,
       unselectedItemColor: Colors.grey.shade400,
       backgroundColor: Colors.white,
+      topOfBottomNavigationBar: ({Widget? child}) => Container(child: child),
       // Default is Colors.white
       elevation: 12,
       // Default elevation is 12,

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of instagram_bottom_nav_bar;
 
 class InstagramTabView extends StatefulWidget {
@@ -95,7 +97,9 @@ class InstagramTabView extends StatefulWidget {
   // work inside onTap function
   final Function()? onTapWith;
 
-  const InstagramTabView({
+  Function({Widget child})? topOfBottomNavigationBar;
+
+   InstagramTabView({
     Key? key,
     this.elevation,
     this.bottomNavigationBarType,
@@ -133,9 +137,10 @@ class InstagramTabView extends StatefulWidget {
     this.dividerRadius,
     this.middleColor,
     this.currentIndex,
-    this.middleHeight, this.onTapWith,
+    this.middleHeight,
+    this.onTapWith,
+    this.topOfBottomNavigationBar,
   }) : super(key: key);
-
 
   static void clear() {
     TabConsts.bottomBarItemList.clear();
@@ -151,7 +156,6 @@ class InstagramTabView extends StatefulWidget {
 class _InstagramTabViewState extends State<InstagramTabView>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-
 
   // current index is 0 at first and you start at first page
   int currentIndex = 0;
@@ -212,7 +216,59 @@ class _InstagramTabViewState extends State<InstagramTabView>
   Widget build(BuildContext context) {
     // we are adding tabs in build because when change some tab
     // we should see immediately
+    generateTabs();
+    if(widget.topOfBottomNavigationBar == null){
+      widget.topOfBottomNavigationBar = ({Widget? child}){
+        return SizedBox(child: child);
+      };
+    }
+    return WillPopScope(
+      onWillPop: () => onWillPop(),
+      child: Scaffold(
+        bottomNavigationBar: widget.topOfBottomNavigationBar!(
+          child: BottomNavigationBar(
+            elevation: widget.elevation ?? 12,
+            type:
+                widget.bottomNavigationBarType ?? BottomNavigationBarType.fixed,
+            currentIndex: currentIndex,
+            selectedFontSize: widget.selectedFontSize ?? 8,
+            backgroundColor: widget.backgroundColor ?? Colors.white,
+            selectedLabelStyle: widget.selectedLabelStyle ??
+                const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                ),
+            unselectedLabelStyle: widget.unselectedLabelStyle ??
+                const TextStyle(
+                  color: Colors.red,
+                  fontSize: 12,
+                ),
+            iconSize: widget.iconSize ?? 24,
+            showUnselectedLabels: widget.showUnselectedLabels ?? true,
+            showSelectedLabels: widget.showSelectedLabels ?? true,
+            selectedIconTheme: widget.selectedIconTheme,
+            landscapeLayout: widget.bottomNavigationBarLandscapeLayout,
+            selectedItemColor: widget.selectedItemColor,
+            unselectedItemColor: widget.unselectedItemColor,
+            unselectedFontSize: widget.unselectedFontSize ?? 8,
+            enableFeedback: widget.enableFeedback,
+            mouseCursor: widget.mouseCursor,
+            unselectedIconTheme: widget.unselectedIconTheme,
+            onTap: widget.onTap ?? changeIndex,
+            items: TabConsts.bottomBarItemList,
+          ),
+        ),
+        // we used that widget because the keep sized box before the
+        // come that tab
+        body: ProsteIndexedStack(
+          index: currentIndex,
+          children: TabConsts.navigators,
+        ),
+      ),
+    );
+  }
 
+  void generateTabs() {
     TabConsts.bottomBarItemList = List.generate(
       widget.items.length,
       (index) {
@@ -445,47 +501,6 @@ class _InstagramTabViewState extends State<InstagramTabView>
         );
       },
     );
-    return WillPopScope(
-      onWillPop: () => onWillPop(),
-      child: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: widget.elevation ?? 12,
-          type: widget.bottomNavigationBarType ?? BottomNavigationBarType.fixed,
-          currentIndex: currentIndex,
-          selectedFontSize: widget.selectedFontSize ?? 8,
-          backgroundColor: widget.backgroundColor ?? Colors.white,
-          selectedLabelStyle: widget.selectedLabelStyle ??
-              const TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-              ),
-          unselectedLabelStyle: widget.unselectedLabelStyle ??
-              const TextStyle(
-                color: Colors.red,
-                fontSize: 12,
-              ),
-          iconSize: widget.iconSize ?? 24,
-          showUnselectedLabels: widget.showUnselectedLabels ?? true,
-          showSelectedLabels: widget.showSelectedLabels ?? true,
-          selectedIconTheme: widget.selectedIconTheme,
-          landscapeLayout: widget.bottomNavigationBarLandscapeLayout,
-          selectedItemColor: widget.selectedItemColor,
-          unselectedItemColor: widget.unselectedItemColor,
-          unselectedFontSize: widget.unselectedFontSize ?? 8,
-          enableFeedback: widget.enableFeedback,
-          mouseCursor: widget.mouseCursor,
-          unselectedIconTheme: widget.unselectedIconTheme,
-          onTap: widget.onTap ?? changeIndex,
-          items: TabConsts.bottomBarItemList,
-        ),
-        // we used that widget because the keep sized box before the
-        // come that tab
-        body: ProsteIndexedStack(
-          index: currentIndex,
-          children: TabConsts.navigators,
-        ),
-      ),
-    );
   }
 
   // about the navigator pop
@@ -515,7 +530,7 @@ class _InstagramTabViewState extends State<InstagramTabView>
 
   // change bottom bar index
   void changeIndex(int itemIndex) {
-    if(widget.onTapWith != null){
+    if (widget.onTapWith != null) {
       widget.onTapWith!();
     }
     setState(() {});

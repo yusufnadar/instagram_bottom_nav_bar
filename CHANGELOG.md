@@ -57,3 +57,6 @@
 
 ## [3.0.11] - 2023-04-24
 - Clear method provide to use bottom navigation bar again
+
+## [3.0.12] - 2023-04-24
+- Wrap up bottom navigation bar

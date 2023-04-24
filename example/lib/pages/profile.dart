@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:instagram_bottom_nav_bar/instagram_tab_view.dart';
+
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
 
@@ -17,15 +18,16 @@ class Profile extends StatelessWidget {
       body: Center(
         child: FutureBuilder(
           future: get(),
-          builder: (context, snapshot) => snapshot.data != null ? Text(snapshot.data) : Text(''),
+          builder: (context, snapshot) =>
+              snapshot.data != null ? Text(snapshot.data) : Text(''),
         ),
       ),
     );
   }
 
-  Future get()async{
-    var res = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
+  Future get() async {
+    var res = await http
+        .get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
     return json.decode(res.body)['title'];
   }
 }
-
